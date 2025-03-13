@@ -1,0 +1,85 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load compress %}
+    {% load render_bundle from webpack_loader %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% compress css inline%}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/materialdesignicons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main/vuetify.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'css/canvas/canvas.scss' %}">
+    {% endcompress %}
+
+    {% compress js inline %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% endcompress %}
+
+    <script>
+        document.onreadystatechange = function () {
+            var state = document.readyState;
+            if (state === 'interactive') {
+                document.getElementById('body_content').style.visibility = "hidden";
+            } else if (state === 'complete') {
+                document.getElementById('load_body').style.visibility = "hidden";
+                document.getElementById('body_content').style.visibility = "visible";
+
+                // setTimeout(function () {
+                //     document.getElementById('interactive');
+                //     document.getElementById('body_content').style.visibility = "visible";
+                //     document.getElementById('load_body').style.visibility = "hidden";
+                // }, 1000);
+            }
+        }
+    </script>
+
+
+</head>
+<body id="body_content">
+<div id="load_body" class="preloader">
+
+    <div class="loadingio-spinner-spinner-anfjicak0f7">
+        <div class="ldio-x82byh72hl">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <small>setting up simulation lab</small>
+    <small>Please, wait...</small>
+
+</div>
+<div id="canvasbackgroundprogress">
+
+</div>
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
+{% render_bundle 'chunk-vendors' %}
+{% render_bundle 'canvas_background_progress' %}
+
+
+
+
